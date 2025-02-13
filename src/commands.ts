@@ -20,7 +20,7 @@ export const openWeb = vscode.commands.registerCommand('nautobot.openWeb', () =>
 
 export const startServices = vscode.commands.registerCommand('nautobot.start', async () => {
 	const tasksPyFiles = await gatherTaskFiles();
-	if (tasksPyFiles.length === 0) { return }
+	if (tasksPyFiles.length === 0) { return; }
 
 	// If theres more than one, filter to tasks.py files that includes a line
 	// that has "def debug(context" in it. If that includes more than one prompt
@@ -80,7 +80,7 @@ export const startServices = vscode.commands.registerCommand('nautobot.start', a
 
 export const invokeRunner = vscode.commands.registerCommand('nautobot.invoke', async () => {
 	const tasksPyFiles = await gatherTaskFiles();
-	if ( tasksPyFiles.length === 0) { return }
+	if ( tasksPyFiles.length === 0) { return; }
 
 	var cdPath: string;
 
@@ -113,7 +113,7 @@ export const invokeRunner = vscode.commands.registerCommand('nautobot.invoke', a
 
 		const terminal = vscode.window.createTerminal({cwd: cdPath, name: 'Nautobot Invoke'});
 		terminal.sendText(`poetry run inv ${invTask.task}`);
-		terminal.show()
+		terminal.show();
 	});
 
 });

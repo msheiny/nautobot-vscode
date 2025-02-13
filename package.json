@@ -51,7 +51,7 @@
     "check-types": "tsc --noEmit",
     "lint": "eslint src",
     "test": "vscode-test",
-    "format": "prettier --write src/**/*.ts"
+    "format": "prettier --write src/**/*.ts && eslint --fix src"
   },
   "devDependencies": {
     "@types/dockerode": "^3.3.34",
