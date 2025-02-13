@@ -10,7 +10,7 @@ export async function gatherTaskFiles(): Promise<vscode.Uri[]> {
     const fileContents = (
       await vscode.workspace.openTextDocument(file.fsPath)
     ).getText();
-    if (fileContents.includes("from invoke import")) {
+    if (fileContents.includes("from invoke")) {
       tasksPyFilesWithInvoke.push(file);
     }
   }
