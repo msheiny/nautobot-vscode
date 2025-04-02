@@ -36,6 +36,12 @@
         "command": "nautobot.openSeleniumVNC",
         "title": "Open Nautobot Selenium VNC (docker)"
       }
+    ],
+    "snippets": [
+      {
+        "language": "python",
+        "path": "./snippets/nautobot.json"
+      }
     ]
   },
   "scripts": {

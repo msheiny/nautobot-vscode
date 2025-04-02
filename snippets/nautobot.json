@@ -1,0 +1,24 @@
+{
+	"Generic Nautobot Job": {
+		"prefix": "nautojob-job",
+		"body": [
+			"from nautobot.extras.jobs import Job",
+			"",
+			"",
+			"class ${1:MyJob}(Job):",
+			"    \"\"\"${2:Description of the job.}\"\"\"",
+			"",
+			"    class Meta:",
+			"        \"\"\"Required Meta class for Nautobot Job.\"\"\"",
+			"",
+			"        name = \"${3:Job Name}\"",
+			"        description = \"${4:Detailed job description.}\"",
+			"        soft_time_limit = ${5:300}",
+			"",
+			"    def run(self):",
+			"        \"\"\"${6:Core kick-off of our job.}\"\"\"",
+			"        # Your job logic here"
+		],
+		"description": "Create a generic Nautobot Job class"
+	}
+}
