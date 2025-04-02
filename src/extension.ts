@@ -1,12 +1,18 @@
 import * as vscode from 'vscode';
-import { invokeRunner, openVNC, openWeb, startServices } from './commands';
+import { invokeRunner, openDocs, openVNC, openWeb, startServices } from './commands';
+import { NautobotCodeLensProvider } from './utils/docviewer';
 
 export function activate(context: vscode.ExtensionContext) {
 
 	console.log('"nautobot" extension activated');
 
-	context.subscriptions.push(openWeb, startServices, invokeRunner, openVNC);
-}
+	const codeLensProvider = new NautobotCodeLensProvider();
 
-// This method is called when your extension is deactivated
-export function deactivate() {}
+	context.subscriptions.push(openWeb,
+		startServices,
+		invokeRunner,
+		openVNC,
+		openDocs,
+		vscode.languages.registerCodeLensProvider({ language: 'python' }, codeLensProvider)
+	);
+}

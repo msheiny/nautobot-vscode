@@ -53,9 +53,12 @@ export function openNautobotApp(props: openNautobotAppProps) {
             (port) => port.PrivatePort === props.privatePort,
           )?.PublicPort,
         }));
-        var selectedNautobotContainer = await vscode.window.showQuickPick(containerOptions, {
+        var selectedNautobotContainer = await vscode.window.showQuickPick(
+          containerOptions,
+          {
             placeHolder: "Select a Nautobot instance to open in the browser",
-          });
+          },
+        );
 
         // If user cancels the quick pick, return.
         if (!selectedNautobotContainer) {

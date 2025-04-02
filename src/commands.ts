@@ -3,19 +3,20 @@ import * as path from 'path';
 import * as vscode from 'vscode';
 import { openNautobotApp as openNautobotSystemApp } from './utils/docker';
 import { gatherTaskFiles } from './utils/utils';
+import { NautobotDocMapProp, openDocInWebview } from './utils/docviewer';
 
 export const openVNC = vscode.commands.registerCommand('nautobot.openSeleniumVNC', () => {
 	/*
 	Pop open whatever system application handle VNC connections to the selected selenium container.
 	*/
-	openNautobotSystemApp({privatePort: 5900, containerName: 'selenium', uriPrefix: 'vnc://:secret@'});
+	openNautobotSystemApp({ privatePort: 5900, containerName: 'selenium', uriPrefix: 'vnc://:secret@' });
 });
 
 export const openWeb = vscode.commands.registerCommand('nautobot.openWeb', () => {
 	/*
 	Pop open system web browser to the chosen nautobot console page.
 	*/
-	openNautobotSystemApp({privatePort: 8080, containerName: '-nautobot', uriPrefix: 'http://'});
+	openNautobotSystemApp({ privatePort: 8080, containerName: '-nautobot', uriPrefix: 'http://' });
 });
 
 export const startServices = vscode.commands.registerCommand('nautobot.start', async () => {
@@ -76,11 +77,11 @@ export const startServices = vscode.commands.registerCommand('nautobot.start', a
 			vscode.window.showInformationMessage('Nautobot services started successfully');
 		});
 	}
-	});
+});
 
 export const invokeRunner = vscode.commands.registerCommand('nautobot.invoke', async () => {
 	const tasksPyFiles = await gatherTaskFiles();
-	if ( tasksPyFiles.length === 0) { return; }
+	if (tasksPyFiles.length === 0) { return; }
 
 	var cdPath: string;
 
@@ -98,22 +99,26 @@ export const invokeRunner = vscode.commands.registerCommand('nautobot.invoke', a
 		cdPath = path.dirname(tasksPyFiles[0].fsPath);
 	}
 
-	exec("poetry run inv --complete", { cwd: cdPath}, async (error, stdout, stderr) => {
+	exec("poetry run inv --complete", { cwd: cdPath }, async (error, stdout, stderr) => {
 		console.log(stdout);
 		if (error) {
 			vscode.window.showErrorMessage(`Failed to get invoke tasks: ${stderr}`);
 			return;
 		}
-		const invokeTasks = stdout.trim().split('\n').map(line => ({label: line, task: line}));
+		const invokeTasks = stdout.trim().split('\n').map(line => ({ label: line, task: line }));
 		const invTask = await vscode.window.showQuickPick(invokeTasks, { placeHolder: 'Select task to run' });
 
 		if (!invTask) {
 			return;
 		}
 
-		const terminal = vscode.window.createTerminal({cwd: cdPath, name: 'Nautobot Invoke'});
+		const terminal = vscode.window.createTerminal({ cwd: cdPath, name: 'Nautobot Invoke' });
 		terminal.sendText(`poetry run inv ${invTask.task}`);
 		terminal.show();
 	});
 
+});
+
+export const openDocs = vscode.commands.registerCommand('nautobot.openDocumentation', (doc: NautobotDocMapProp) => {
+	openDocInWebview(doc);
 });
