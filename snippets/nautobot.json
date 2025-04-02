@@ -1,6 +1,6 @@
 {
 	"Generic Nautobot Job": {
-		"prefix": "nautojob-job",
+		"prefix": "nautobot-job",
 		"body": [
 			"from nautobot.extras.jobs import Job",
 			"",

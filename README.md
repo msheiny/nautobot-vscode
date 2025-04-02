@@ -10,6 +10,12 @@ Commands:
 * `start` - Start a local nautobot instance, depending on the open nautobot apps open in your workspace.
 * `invoke` - Will run any invoke task in one of the nautobot folders in your workspace.
 
+Snippets:
+* Prefixed with `nautobot-*` hope to continually add useful usable Nautobot snippets. See the `snipppets/nautobot.json` file.
+
+CodeLens:
+* Adds side-bar links above certain code-patterns. Example: Link to the Jobs developer documentation above a Job class definition.
+
 ## Local Development
 
 * Hit `F5` to kick off the `Run Extension` launch task, this will open up a new window.
