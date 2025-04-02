@@ -3,7 +3,7 @@
   "displayName": "Nautobot",
   "description": "Nautobot development helper",
   "publisher": "msheiny",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "icon": "images/nautobot_logo.png",
   "engines": {
     "vscode": "^1.96.0"
